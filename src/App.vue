@@ -11,4 +11,7 @@ import Layout from '@/views/layout/index.vue'
   margin: 0;
   padding: 0;
 }
+#app {
+  font-size: 14px;
+}
 </style>

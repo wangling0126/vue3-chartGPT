@@ -12,6 +12,8 @@ specifiers:
   eslint-plugin-vue: ^9.7.0
   husky: ^8.0.2
   lint-staged: ^13.0.3
+  pinia: ^2.0.33
+  pinia-plugin-persistedstate: ^3.1.0
   prettier: ^2.7.1
   sass: ^1.59.3
   sass-loader: ^13.2.0
@@ -26,6 +28,8 @@ specifiers:
 dependencies:
   cz-conventional-changelog: registry.npmmirror.com/cz-conventional-changelog/3.3.0
   element-plus: 2.3.0_vue@3.2.45
+  pinia: 2.0.33_zwu2zepfy3m6u2gunxlolp35gi
+  pinia-plugin-persistedstate: 3.1.0_pinia@2.0.33
   vue: registry.npmmirror.com/vue/3.2.45
 
 devDependencies:
@@ -232,6 +236,10 @@ packages:
 
   /@types/web-bluetooth/0.0.16:
     resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
+    dev: false
+
+  /@vue/devtools-api/6.5.0:
+    resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==}
     dev: false
 
   /@vueuse/core/9.13.0_vue@3.2.45:
@@ -2008,6 +2016,32 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
     dev: true
+
+  /pinia-plugin-persistedstate/3.1.0_pinia@2.0.33:
+    resolution: {integrity: sha512-8UN+vYMEPBdgNLwceY08mi5olI0wkYaEb8b6hD6xW7SnBRuPydWHlEhZvUWgNb/ibuf4PvufpvtS+dmhYjJQOw==}
+    peerDependencies:
+      pinia: ^2.0.0
+    dependencies:
+      pinia: 2.0.33_zwu2zepfy3m6u2gunxlolp35gi
+    dev: false
+
+  /pinia/2.0.33_zwu2zepfy3m6u2gunxlolp35gi:
+    resolution: {integrity: sha512-HOj1yVV2itw6rNIrR2f7+MirGNxhORjrULL8GWgRwXsGSvEqIQ+SE0MYt6cwtpegzCda3i+rVTZM+AM7CG+kRg==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.5.0
+      typescript: registry.npmmirror.com/typescript/4.8.4
+      vue: registry.npmmirror.com/vue/3.2.45
+      vue-demi: 0.13.11_vue@3.2.45
+    dev: false
 
   /pkg-dir/4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
