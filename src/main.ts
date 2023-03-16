@@ -9,7 +9,11 @@ import { createPersistedState } from 'pinia-plugin-persistedstate'
 const pinia = createPinia()
 pinia.use(createPersistedState())
 
+// element
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 const app = createApp(App)
-app.use(pinia).use(regGlobalComponent)
+app.use(ElementPlus).use(pinia).use(regGlobalComponent)
 
 app.mount('#app')

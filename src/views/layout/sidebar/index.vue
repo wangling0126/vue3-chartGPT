@@ -2,11 +2,17 @@
   <div class="sidebar">
     <div class="add-chart" @click="addChart">
       <svg-icon icon="add" color="white" class="icon-common"></svg-icon>
-      增加聊天
+      <span>增加聊天</span>
     </div>
     <div class="chart-list">
-      <div v-for="item in globalStore.chats" :key="item.title">
-        <div>{{ item.title }}aaa</div>
+      <div
+        v-for="(item, index) in globalStore.chats"
+        :key="item.title"
+        class="chart-item"
+        :class="{ active: globalStore.currentChatIndex === index }"
+      >
+        <svg-icon icon="page" color="white" class="icon-common"></svg-icon>
+        <div>{{ item.title }}</div>
       </div>
     </div>
   </div>
@@ -17,7 +23,7 @@ export default { name: 'SidebarCom' }
 </script>
 
 <script setup lang="ts">
-import { Chat } from '@/stores/global'
+import { Chat } from '@/types/chart'
 import { useGlobalStore } from '@/stores/global'
 const getInitChart = (): Chat => {
   return {
@@ -71,6 +77,25 @@ if (!globalStore.chats.length) {
   }
 }
 .icon-common {
-  margin-right: 4px;
+  margin-right: 8px;
+  font-size: 16px;
+}
+.chart-list {
+  margin-top: 10px;
+}
+.chart-item {
+  padding: 10px;
+  border-radius: 4px;
+  background: transparent;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background-color: #343541;
+  }
+}
+.active {
+  background-color: #343541;
 }
 </style>
