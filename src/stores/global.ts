@@ -18,6 +18,9 @@ export const useGlobalStore = defineStore('global', {
     addChats(data: Chat) {
       this.gptData.chats.unshift(data)
       this.gptData.currentChatIndex = 0
+    },
+    changeCurrentChatIndex(index: number) {
+      this.gptData.currentChatIndex = index
     }
   },
   getters: {

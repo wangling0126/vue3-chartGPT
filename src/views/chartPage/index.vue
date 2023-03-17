@@ -1,15 +1,12 @@
 <template>
   <div class="chart-page">
-    <div v-for="(item, index) in answerList" :key="index">
-      <el-input
-        v-model="item.content"
-        type="textarea"
-        placeholder="Please input"
-        style="width: 100%"
-        v-if="index === answerList.length - 1 || answerList.length === 1"
-      ></el-input>
-      <VueMarkdown :source="`aaa`"></VueMarkdown>
-    </div>
+    <ChartContent
+      v-for="(item, index) in answerList"
+      :key="index"
+      :item="item"
+      @updateContent="(value) => (item.content = value)"
+    >
+    </ChartContent>
     <el-button type="primary" @click="submitChart">提交</el-button>
   </div>
 </template>
@@ -22,7 +19,7 @@ export default { name: 'ChartPage' }
 import { getChatCompletion } from '@/api/chat'
 import { useGlobalStore } from '@/stores/global'
 import { computed } from 'vue'
-import VueMarkdown from 'vue-markdown'
+import ChartContent from './ChartContent.vue'
 const globalStore = useGlobalStore()
 
 const answerList = computed(() => {

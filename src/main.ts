@@ -1,7 +1,7 @@
 import 'virtual:svg-icons-register'
 import { createApp } from 'vue'
 import regGlobalComponent from './components/common/regGlobalComponent'
-import './style.css'
+import './styles/index.scss'
 import App from './App.vue'
 // pinia
 import { createPinia } from 'pinia'
@@ -14,6 +14,9 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 const app = createApp(App)
-app.use(ElementPlus).use(pinia).use(regGlobalComponent)
+app
+  .use(ElementPlus, { size: 'small', zIndex: 20000 })
+  .use(pinia)
+  .use(regGlobalComponent)
 
 app.mount('#app')

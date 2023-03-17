@@ -10,6 +10,7 @@
         :key="item.title"
         class="chart-item"
         :class="{ active: globalStore.currentChatIndex === index }"
+        @click="changeActive(index)"
       >
         <svg-icon icon="page" color="white" class="icon-common"></svg-icon>
         <div>{{ item.title }}</div>
@@ -59,6 +60,10 @@ const addChart = () => {
 }
 if (!globalStore.chats.length) {
   addChart()
+}
+
+const changeActive = (index: number) => {
+  globalStore.changeCurrentChatIndex(index)
 }
 </script>
 <style scoped lang="scss">

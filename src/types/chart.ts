@@ -1,6 +1,10 @@
+export interface CharContentItem {
+  role: string
+  content: string
+}
 export interface Chat {
   title: string
-  messages: { role: string; content: string }[]
+  messages: CharContentItem[]
   config: {
     frequency_penalty: number
     presence_penalty: number

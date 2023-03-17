@@ -1,3 +1,5 @@
+import { LStorage } from '@/utils/storage'
+
 const baseUrl = ``
 
 export const request = (
@@ -6,7 +8,7 @@ export const request = (
   useApiKey = true
 ): Promise<any> => {
   // 在请求头中加入token
-  const token = localStorage.getItem('token')
+  const token = LStorage.get('token')
   const headers = new Headers(options.headers)
   if (token && useApiKey) {
     headers.set('Authorization', `Bearer ${token}`)

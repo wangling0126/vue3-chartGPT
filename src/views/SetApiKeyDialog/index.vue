@@ -1,5 +1,10 @@
 <template>
-  <el-dialog v-model="innerVisible" title="设置apikey" width="50%">
+  <el-dialog
+    v-model="innerVisible"
+    title="设置apikey"
+    width="50%"
+    append-to-body
+  >
     <el-input
       v-model="apikey"
       placeholder="请输入apikey"
@@ -34,7 +39,7 @@ const innerVisible = computed({
 
 const apikey = ref('')
 const saveApiKey = () => {
-  localStorage.setItem('token', apikey.value)
+  LStorage.set('token', apikey.value)
 }
 </script>
 
