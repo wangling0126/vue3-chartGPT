@@ -33,14 +33,14 @@ onMounted(() => {
     el: editor.value,
     theme: 'dark',
     height: '500px',
-    // viewer: true,
-    // initialEditType: 'markdown',
-    // previewStyle: 'vertical',
-    plugins: [[codeSyntaxHighlight, { highlighter: Prism }]]
-    // events: {
-    //   change: () =>
-    //     emit('update:modelValue', mkEditor && mkEditor.getMarkdown())
-    // }
+    viewer: true,
+    initialEditType: 'markdown',
+    previewStyle: 'vertical',
+    plugins: [[codeSyntaxHighlight, { highlighter: Prism }]],
+    events: {
+      change: () =>
+        emit('update:modelValue', mkEditor && mkEditor.getMarkdown())
+    }
   })
   mkEditor && mkEditor.setMarkdown(props.modelValue)
 })

@@ -8,8 +8,7 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
-    "format": "prettier --write \"./**/*.{html,vue,ts,js,cjs,json,md}\"",
-    "prepare": "husky install"
+    "format": "prettier --write \"./**/*.{html,vue,ts,js,cjs,json,md}\""
   },
   "dependencies": {
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
@@ -48,21 +47,5 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^1.0.9",
     "webpack": "5.0.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,vue,ts}": [
-      "eslint --fix",
-      "git add"
-    ]
   }
 }

@@ -1,5 +1,5 @@
 import piniaPersistConfig from '@/config/piniaPersist'
-import { Chat, GlobalState } from '@/types/chart'
+import { Chat, GlobalState, CharContentItem } from '@/types/chart'
 import { defineStore } from 'pinia'
 
 export const useGlobalStore = defineStore('global', {
@@ -21,6 +21,15 @@ export const useGlobalStore = defineStore('global', {
     },
     changeCurrentChatIndex(index: number) {
       this.gptData.currentChatIndex = index
+    },
+    addChatItem(chatItem: CharContentItem) {
+      this.gptData.chats[this.currentChatIndex].messages.push(chatItem)
+    },
+    setChatItem(chatItem: Partial<CharContentItem>, index: number) {
+      Object.assign(
+        this.gptData.chats[this.currentChatIndex].messages[index],
+        chatItem
+      )
     }
   },
   getters: {

@@ -1,14 +1,15 @@
 <template>
-  <div style="height: 500px">
+  <div>
     <!--v-if="index === answerList.length - 1 || answerList.length === 1"  -->
-    <!-- <el-input
-      v-model.model="item.content"
+    <el-input
+      v-model="content"
+      :rows="2"
       type="textarea"
       placeholder="Please input"
       style="width: 100%"
-    ></el-input> -->
-    <!-- <WangEditor v-model:content="content" /> -->
-    <Viewer v-model="content" />
+      v-if="item.role === 'user'"
+    ></el-input>
+    <Viewer v-else v-model="content" />
   </div>
 </template>
 

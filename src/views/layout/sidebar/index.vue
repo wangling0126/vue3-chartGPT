@@ -31,8 +31,8 @@ const getInitChart = (): Chat => {
     title: '1',
     messages: [
       {
-        role: 'system',
-        content: 'hello'
+        role: 'user',
+        content: ''
       }
     ],
     config: {
