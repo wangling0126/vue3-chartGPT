@@ -7,7 +7,8 @@
       placeholder="Please input"
       style="width: 100%"
     ></el-input> -->
-    <WangEditor v-model:content="content" />
+    <!-- <WangEditor v-model:content="content" /> -->
+    <Viewer v-model="content" />
   </div>
 </template>
 
@@ -17,7 +18,8 @@ export default { name: 'ChartContent' }
 
 <script setup lang="ts">
 import { CharContentItem } from '@/types/chart'
-import WangEditor from '@/components/WangEditer/index.vue'
+// import WangEditor from '@/components/WangEditer/index.vue'
+import Viewer from '@/components/ToastUiEditor/Viewer.vue'
 import { computed } from 'vue'
 const props = defineProps<{
   item: CharContentItem
