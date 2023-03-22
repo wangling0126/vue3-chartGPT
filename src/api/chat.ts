@@ -1,7 +1,7 @@
 import { LStorage } from '@/utils/storage'
 import { Chat } from './../types/chart'
-import { request } from './request'
-
+import { baseUrl, request } from './request'
+import { useModelsStore } from '@/stores/models'
 export const getChatCompletion = async (
   endpoint: string,
   messages: Chat['messages'],
@@ -14,7 +14,7 @@ export const getChatCompletion = async (
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
+      model: useModelsStore().currentModel || 'gpt-3.5-turbo',
       messages,
       ...config,
       stream: true
@@ -27,7 +27,6 @@ export const getChatCompletion = async (
 }
 
 export const getChatCompletionStream = async (
-  endpoint: string,
   messages: Chat['messages'],
   config: Chat['config'],
   useApiKey = true
@@ -39,11 +38,11 @@ export const getChatCompletionStream = async (
   if (token && useApiKey) {
     headers['Authorization'] = `Bearer ${token}`
   }
-  const response = await fetch(endpoint, {
+  const response = await fetch(baseUrl + '/chat/completions', {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
+      model: useModelsStore().currentModel || 'gpt-3.5-turbo',
       messages,
       ...config,
       stream: true

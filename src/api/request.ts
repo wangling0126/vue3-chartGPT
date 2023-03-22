@@ -1,6 +1,6 @@
 import { LStorage } from '@/utils/storage'
 
-const baseUrl = ``
+export const baseUrl = `https://api.openai.com/v1`
 
 export const request = (
   url: string,
@@ -22,8 +22,6 @@ export const request = (
   return fetch(baseUrl + url, { ...options, headers })
     .then(async (response) => {
       if (response.ok) {
-        // 在处理响应之后做一些处理
-        // ...
         return response.json()
       } else {
         throw new Error(await response.text())

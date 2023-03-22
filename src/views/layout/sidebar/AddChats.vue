@@ -1,0 +1,81 @@
+<template>
+  <div>
+    <AddChatCommon
+      title="增加聊天"
+      @add-chat="addChart"
+      @toggle-fold="toggleFold"
+    />
+    <div ref="chatWrap" style="overflow: hidden" class="chatWrap">
+      <div class="chart-list" ref="chatList">
+        <ChatItemCommon
+          v-for="(item, index) in globalStore.chats"
+          :key="item.title"
+          :title="item.title"
+          :class="{ active: globalStore.currentChatIndex === index }"
+          @change-active="changeActive(index)"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+export default { name: 'SidebarCom' }
+</script>
+
+<script setup lang="ts">
+import AddChatCommon from './components/AddChatCommon.vue'
+import { Chat } from '@/types/chart'
+import { useGlobalStore } from '@/stores/global'
+import { Ref, ref } from 'vue'
+import ChatItemCommon from './components/ChatItemCommon.vue'
+const getInitChart = (): Chat => {
+  return {
+    title: '1',
+    messages: [
+      {
+        role: 'user',
+        content: ''
+      }
+    ],
+    config: {
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      temperature: 1,
+      top_p: 1
+    }
+  }
+}
+
+const globalStore = useGlobalStore()
+
+const addChart = () => {
+  let titleIndex = 1
+  let title = `新页面 ${titleIndex}`
+  while (globalStore.chats.some((chat) => chat.title === title)) {
+    titleIndex += 1
+    title = `新页面 ${titleIndex}`
+  }
+  globalStore.addChats({
+    ...getInitChart(),
+    title: title
+  })
+}
+if (!globalStore.chats.length) {
+  addChart()
+}
+
+const changeActive = (index: number) => {
+  globalStore.changeCurrentChatIndex(index)
+}
+
+const chatWrap = ref<HTMLElement | null>(null)
+const chatList = ref<HTMLElement | null>(null)
+const toggleFold = (isFold: boolean) => {
+  if (!chatWrap.value) {
+    return
+  }
+  chatWrap.value.style.maxHeight = isFold ? '0px' : ''
+}
+</script>
+<style scoped lang="scss"></style>

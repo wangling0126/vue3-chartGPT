@@ -29,12 +29,8 @@ const answerList = computed(() => {
 })
 
 const submitChart = async () => {
-  const messages = limitMessageTokens(
-    answerList.value,
-        4000
-      );
+  const messages = limitMessageTokens(answerList.value, 4000)
   const stream = await getChatCompletionStream(
-    'https://api.openai.com/v1/chat/completions',
     messages,
     globalStore.chats[globalStore.currentChatIndex].config
   )

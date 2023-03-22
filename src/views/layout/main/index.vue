@@ -1,6 +1,7 @@
 <template>
   <div class="main-container">
-    <ChartPage />
+    <!-- <ChartPage /> -->
+    <RouterView></RouterView>
     <SetApiKeyDialog v-model:visible="visible" />
   </div>
 </template>
@@ -11,7 +12,7 @@ export default { name: 'MainComp' }
 
 <script setup lang="ts">
 import { LStorage } from '@/utils/storage'
-import ChartPage from '@/views/chartPage/index.vue'
+// import ChartPage from '@/views/chartPage/index.vue'
 import SetApiKeyDialog from '@/views/SetApiKeyDialog/index.vue'
 import { ref } from 'vue'
 

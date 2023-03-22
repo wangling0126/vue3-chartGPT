@@ -1,11 +1,6 @@
 <template>
-  <el-dialog
-    v-model="innerVisible"
-    title="设置apikey"
-    width="50%"
-    append-to-body
-  >
-    <el-input v-model="apikey" placeholder="请输入apikey"></el-input>
+  <el-dialog v-model="innerVisible" title="修改标题" width="50%" append-to-body>
+    <el-input v-model="title" placeholder="修改标题"></el-input>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="innerVisible = false">取消</el-button>
@@ -16,20 +11,22 @@
 </template>
 
 <script lang="ts">
-export default { name: 'SetApiKeyDialog' }
+export default { name: 'EditChatTitle' }
 </script>
 
 <script setup lang="ts">
-import { LStorage } from '@/utils/storage'
-import { computed, ref } from 'vue'
-import { useModelsStore } from '@/stores/models'
+import { computed, ref, watch } from 'vue'
+
 const props = defineProps({
   visible: {
     type: Boolean,
     required: true
+  },
+  title: {
+    type: String
   }
 })
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits(['update:visible', 'handleSure'])
 const innerVisible = computed({
   get() {
     return props.visible
@@ -38,12 +35,19 @@ const innerVisible = computed({
     emit('update:visible', val)
   }
 })
+const title = ref('')
 
-const apikey = ref('')
+watch(
+  () => props.title,
+  (newVal) => {
+    title.value = newVal || ''
+  },
+  {
+    immediate: true
+  }
+)
 const handleSure = () => {
-  LStorage.set('token', apikey.value)
-  useModelsStore().getModels()
-  innerVisible.value = false
+  emit('handleSure', title.value)
 }
 </script>
 
