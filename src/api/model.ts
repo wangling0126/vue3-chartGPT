@@ -1,7 +1,7 @@
 import { request } from './request'
 
 export const getModelsApi = () => {
-  return request('/models', {
+  return request('/v1/models', {
     method: 'GET'
   })
 }

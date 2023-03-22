@@ -29,7 +29,7 @@ const props = defineProps({
     required: true
   }
 })
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits(['update:visible', 'onSuccess'])
 const innerVisible = computed({
   get() {
     return props.visible
@@ -39,11 +39,12 @@ const innerVisible = computed({
   }
 })
 
-const apikey = ref('')
+const apikey = ref(LStorage.get('token') || '')
 const handleSure = () => {
   LStorage.set('token', apikey.value)
   useModelsStore().getModels()
   innerVisible.value = false
+  emit('onSuccess')
 }
 </script>
 
