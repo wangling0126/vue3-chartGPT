@@ -1,6 +1,6 @@
 import { LStorage } from '@/utils/storage'
-import { ElMessage } from 'element-plus'
-export const baseUrl = `https://api.openai.com/v1`
+
+export const baseUrl = `https://api.openai.com`
 
 export const request = (
   url: string,
