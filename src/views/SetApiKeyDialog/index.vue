@@ -23,6 +23,7 @@ export default { name: 'SetApiKeyDialog' }
 import { LStorage } from '@/utils/storage'
 import { computed, ref } from 'vue'
 import { useModelsStore } from '@/stores/models'
+import { useBaseInfoStore } from '@/stores/baseInfo';
 const props = defineProps({
   visible: {
     type: Boolean,
@@ -42,7 +43,11 @@ const innerVisible = computed({
 const apikey = ref(LStorage.get('token') || '')
 const handleSure = () => {
   LStorage.set('token', apikey.value)
+  // 获取模型
   useModelsStore().getModels()
+  // 获取金额详情
+  const baseInfoStore = useBaseInfoStore()
+  baseInfoStore.getMoenyInfo()
   innerVisible.value = false
   emit('onSuccess')
 }

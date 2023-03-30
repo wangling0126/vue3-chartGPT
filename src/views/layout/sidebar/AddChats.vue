@@ -14,7 +14,7 @@
           :class="{ active: globalStore.currentChatIndex === index }"
           @change-active="changeActive(index)"
           @handleDelete="handleDelete(index)"
-          @updateTitle="(title) => handleUpdateTitle(originTitle, index, title)"
+          @updateTitle="(newTitle) => handleUpdateTitle(title, index, newTitle)"
         />
       </div>
     </div>
@@ -32,15 +32,17 @@ import { useGlobalStore } from '@/stores/global'
 import { Ref, ref } from 'vue'
 import ChatItemCommon from './components/ChatItemCommon.vue'
 import { ElMessage } from 'element-plus'
+const globalStore = useGlobalStore()
 const getInitChart = (): Chat => {
-  return {
-    title: '1',
-    messages: [
+  const messages = [
       {
         role: 'user',
         content: ''
       }
-    ],
+    ]
+  return {
+    title: '1',
+    messages: messages,
     config: {
       frequency_penalty: 0,
       presence_penalty: 0,
@@ -50,7 +52,6 @@ const getInitChart = (): Chat => {
   }
 }
 
-const globalStore = useGlobalStore()
 
 const addChart = () => {
   let titleIndex = 1
@@ -59,6 +60,7 @@ const addChart = () => {
     titleIndex += 1
     title = `新页面 ${titleIndex}`
   }
+  globalStore.updateCurrentRole('')
   globalStore.addChats({
     ...getInitChart(),
     title: title
@@ -69,6 +71,7 @@ if (!globalStore.chats.length) {
 }
 
 const changeActive = (index: number) => {
+  globalStore.updateCurrentRole('')
   globalStore.changeCurrentChatIndex(index)
 }
 

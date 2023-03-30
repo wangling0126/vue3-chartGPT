@@ -1,6 +1,9 @@
 import { CharContentItem } from '@/types/chart';
 import countTokens from './countToTokens';
-
+/**
+ * limit字数： 4096
+ * 
+*/
 export const limitMessageTokens = (
   messages: CharContentItem[],
   limit: number = 4096

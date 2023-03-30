@@ -20,7 +20,8 @@ export interface GlobalState {
     apiEndpoint: string
     apiFree: string
     apiKey: string
-  }
+  },
+  currentRole: string
 }
 export interface EventSourceDataChoices {
   delta: {

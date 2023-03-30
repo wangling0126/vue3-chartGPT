@@ -7,14 +7,14 @@
       </div>
       <el-input
         v-model="content"
-        :rows="2"
+        :autosize="{ minRows: 2}"
         type="textarea"
         @keydown="handleKeyDown"
         placeholder="按ctrl + enter快捷提交"
         style="width: 100%"
       ></el-input>
     </div>
-    <div v-else class="chart-input-box">
+    <div v-if="item.role === 'assistant'" class="chart-input-box">
       <div class="icon" style="background-color: rgb(200, 70, 70)">
         <svg-icon icon="personIcon" color="white"></svg-icon>
       </div>

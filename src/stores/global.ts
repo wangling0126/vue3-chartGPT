@@ -10,11 +10,15 @@ export const useGlobalStore = defineStore('global', {
         currentChatIndex: 0,
         apiEndpoint: '',
         apiFree: '',
-        apiKey: ''
-      }
+        apiKey: '',
+      },
+      currentRole: ''
     }
   },
   actions: {
+    updateCurrentRole(role: string) {
+      this.currentRole = role
+    },
     addChats(data: Chat) {
       this.gptData.chats.unshift(data)
       this.gptData.currentChatIndex = 0
@@ -22,8 +26,12 @@ export const useGlobalStore = defineStore('global', {
     changeCurrentChatIndex(index: number) {
       this.gptData.currentChatIndex = index
     },
-    addChatItem(chatItem: CharContentItem) {
-      this.gptData.chats[this.currentChatIndex].messages.push(chatItem)
+    addChatItem(chatItem: CharContentItem, index?: number) {
+      if (index) {
+        this.gptData.chats[this.currentChatIndex].messages.splice(index, 0, chatItem)
+      } else {
+        this.gptData.chats[this.currentChatIndex].messages.push(chatItem)
+      }
     },
     setChatItem(chatItem: Partial<CharContentItem>, index: number) {
       Object.assign(

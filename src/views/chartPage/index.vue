@@ -42,7 +42,7 @@ import {
   downloadMarkdown,
   parseEventSource
 } from '@/utils/helper'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import ChartContent from './ChartContent.vue'
 import { limitMessageTokens } from '@/utils/maxTokenLimit'
 import { ElMessage } from 'element-plus'
@@ -54,7 +54,7 @@ const answerList = computed(() => {
 
 const showAddBtn = computed(() => {
   const lastItem = answerList.value[answerList.value.length - 1]
-  return lastItem.role === 'assistant' && lastItem.content
+  return  lastItem.content
 })
 
 const addChart = () => {
@@ -118,6 +118,33 @@ const submitChart = async () => {
     }
   }
 }
+
+// 添加角色训练师
+watch(() => globalStore.currentRole,newVal => {
+  if (!newVal) {
+    return
+  }
+  // 判断当前message role是否是user,是user就添加到user的前面
+  const lastItem = answerList.value[answerList.value.length - 1]
+  if (lastItem.role === 'user') {
+    if (lastItem.content) {
+      globalStore.addChatItem({
+      role: 'user',
+      content: newVal
+    }, answerList.value.length - 1)
+    } else {
+      globalStore.setChatItem({
+        content: newVal
+      }, answerList.value.length - 1)
+    }
+    
+  } else {
+    globalStore.addChatItem({
+      role: 'user',
+      content: newVal
+    })
+  }
+})
 </script>
 
 <style scoped lang="scss">
