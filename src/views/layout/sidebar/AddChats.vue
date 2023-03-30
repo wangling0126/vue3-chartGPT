@@ -13,6 +13,8 @@
           :title="item.title"
           :class="{ active: globalStore.currentChatIndex === index }"
           @change-active="changeActive(index)"
+          @handleDelete="handleDelete(index)"
+          @updateTitle="(title) => handleUpdateTitle(originTitle, index, title)"
         />
       </div>
     </div>
@@ -29,6 +31,7 @@ import { Chat } from '@/types/chart'
 import { useGlobalStore } from '@/stores/global'
 import { Ref, ref } from 'vue'
 import ChatItemCommon from './components/ChatItemCommon.vue'
+import { ElMessage } from 'element-plus'
 const getInitChart = (): Chat => {
   return {
     title: '1',
@@ -76,6 +79,26 @@ const toggleFold = (isFold: boolean) => {
     return
   }
   chatWrap.value.style.maxHeight = isFold ? '0px' : ''
+}
+
+const handleDelete = (index: number) => {
+  globalStore.deleteChatItem(index)
+}
+const handleUpdateTitle = (
+  originTitle: string,
+  index: number,
+  title: string
+) => {
+  if (originTitle === title) {
+    globalStore.editChatTitle(index, title)
+    return
+  }
+  const allTitles = globalStore.chats.map((item: Chat) => item.title)
+  if (allTitles.includes(title)) {
+    ElMessage.error('title重复了，请检查')
+    return
+  }
+  globalStore.editChatTitle(index, title)
 }
 </script>
 <style scoped lang="scss"></style>

@@ -10,6 +10,7 @@
         @click.stop="handleEdit"
       ></svg-icon>
       <svg-icon
+        v-if="chatLen > 1"
         icon="delete"
         class="icon-common"
         color="#a79e9e"
@@ -29,14 +30,17 @@ export default { name: 'ChatItemCommon' }
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useGlobalStore } from '@/stores/global'
+import { computed, ref } from 'vue'
 import EditChatTitle from './EditChatTitle.vue'
 defineProps<{
   title: string
 }>()
 
 const emits = defineEmits(['changeActive', 'updateTitle', 'handleDelete'])
-
+const chatLen = computed(() => {
+  return useGlobalStore().chats.length
+})
 const changeActive = () => {
   emits('changeActive')
 }

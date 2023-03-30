@@ -30,6 +30,15 @@ export const useGlobalStore = defineStore('global', {
         this.gptData.chats[this.currentChatIndex].messages[index],
         chatItem
       )
+    },
+    editChatTitle(index: number, title: string) {
+      this.gptData.chats[this.currentChatIndex].title = title
+    },
+    deleteChatItem(index: number) {
+      this.gptData.chats.splice(index, 1)
+      if (index === this.currentChatIndex) {
+        this.gptData.currentChatIndex = 0
+      }
     }
   },
   getters: {

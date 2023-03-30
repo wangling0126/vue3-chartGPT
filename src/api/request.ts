@@ -1,5 +1,5 @@
 import { LStorage } from '@/utils/storage'
-
+import { ElMessage } from 'element-plus'
 export const baseUrl = `https://api.openai.com/v1`
 
 export const request = (
@@ -19,15 +19,17 @@ export const request = (
   // 在发起请求之前做一些处理
   // ...
 
-  return fetch(baseUrl + url, { ...options, headers })
-    .then(async (response) => {
+  return new Promise((resolve, rejected) => {
+    fetch(baseUrl + url, { ...options, headers }).then(async (response) => {
+      const responseCopy = response.clone()
       if (response.ok) {
-        return response.json()
+        resolve(response.json())
       } else {
-        throw new Error(await response.text())
+        responseCopy.json().then((err) => {
+          ElMessage.error(err.error.message || '请求错误了')
+          rejected(err)
+        })
       }
     })
-    .catch((error) => {
-      console.error('There was a problem with the fetch operation:', error)
-    })
+  })
 }
